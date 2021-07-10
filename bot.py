@@ -23,7 +23,7 @@ async def process_start_command(message: types.Message):
 
 @dp.message_handler(commands=['help'])
 async def process_help_command(message: types.Message):
-    await message.reply("Напиши мне что-нибудь, и я отпрпавлю этот текст тебе в ответ!")
+    await message.reply("Напиши мне что-нибудь, и я отправлю этот текст тебе в ответ!")
 
 
 if __name__ == '__main__':
