@@ -9,7 +9,6 @@ from config import TOKEN
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
-
 logging.basicConfig(level=logging.INFO)
 
 @dp.message_handler()
