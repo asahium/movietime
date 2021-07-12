@@ -18,6 +18,7 @@ logging.basicConfig(level=logging.INFO)
 Start_message = text(
     "Привет 👋",
     "На связи бот @movieproject_bot! Как я могу тебе помочь?",
+    "Для справки /start",
     sep="\n"
 )
 
@@ -41,13 +42,20 @@ async def process_help_command(message: types.Message):
 
 @dp.message_handler(commands=['secret'])
 async def process_help_command(message: types.Message):
-    await message.reply(text="Тык", url="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=PLxb0XwjhqM_RLETkiOkUZrEE8K-fP3V-p&index=3")
+    await message.reply("Лови",
+                        reply_markup=kb.secret)
 
 @dp.message_handler()
 async def echo_message(msg: types.Message):
     await msg.reply(msg.from_user.id, msg.text)
 #    await bot.send_message(msg.from_user.id, msg.text)
 
+@dp.message_handler(content_types=ContentType.ANY)
+async def unknown_message(msg: types.Message):
+    message_text = text(emojize('Я не знаю, что с этим делать :astonished:'),
+                        italic('\nЯ просто напомню,'), 'что есть',
+                        code('команда'), '/help')
+    await msg.reply(message_text, parse_mode=ParseMode.MARKDOWN)
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)

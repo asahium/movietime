@@ -22,3 +22,10 @@ button_hi_3 = KeyboardButton(text_button_hi_3)
 button_hi_4 = KeyboardButton(text_button_hi_4)
 
 markup_start = ReplyKeyboardMarkup().add(button_hi_1).add(button_hi_2).add(button_hi_3).add(button_hi_4)
+
+
+
+
+
+
+secret.add(InlineKeyboardButton('Тык', url='https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=PLxb0XwjhqM_RLETkiOkUZrEE8K-fP3V-p&index=3'))
