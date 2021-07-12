@@ -1,8 +1,8 @@
 import kinopoisk_api
 from kinopoisk_api import KP
+from config import KP_TOKEN
 
-
-kinopoisk = kinopoisk_api.KP(token='Push your token here')
+kinopoisk = kinopoisk_api.KP(token=KP_TOKEN)
 
 def search(name):
     search = kinopoisk.search(name)
@@ -16,7 +16,7 @@ def search(name):
             break
 
 def info(t):
-    kinopoisk = KP(token='Push your token here')
+    kinopoisk = KP(token=KP_TOKEN)
 
     t = kinopoisk.get_film(1236063)
 
