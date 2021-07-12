@@ -7,12 +7,13 @@ from aiogram.utils.markdown import text
 
 from config import TOKEN
 import keyboards as kb
+
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
 logging.basicConfig(level=logging.INFO)
 
-
+'''
 @dp.callback_query_handler(func=lambda c: c.data == 'button1')
 async def process_callback_button1(callback_query: types.CallbackQuery):
     await bot.answer_callback_query(callback_query.id)
@@ -35,7 +36,7 @@ async def process_callback_kb1btn1(callback_query: types.CallbackQuery):
         await bot.answer_callback_query(callback_query.id)
     await bot.send_message(callback_query.from_user.id, f'Нажата инлайн кнопка! code={code}')
 
-
+'''
 ##
 
 
