@@ -37,7 +37,7 @@ $ git clone https://github.com/asahium/movietime.git
 $ pip install -r requirements.txt
 ```
 
-### Получение токена KinopoiskAPI
+### Получение токена для доступа к данным сайта [Кинопоиск](https://www.kinopoisk.ru)
 Для получения токена необходима регистрация на сайте(но можно и мой использовать)
 <a href="https://kinopoiskapiunofficial.tech/signup">kinopoiskapiunofficial.tech</a>.
 После регистрации перейдите в настройки своего <a href="https://kinopoiskapiunofficial.tech/user">профиля</a> и сохраните токен.
