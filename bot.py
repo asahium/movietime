@@ -4,7 +4,7 @@ from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 from aiogram.utils.markdown import text
-
+from kinodef import search
 from config import TOKEN
 import keyboards as kb
 
@@ -16,7 +16,9 @@ logging.basicConfig(level=logging.INFO)
 ##
 
 Start_message = text(
-    "На связи бот @movieproject_bot! Как я могу тебе помочь?"
+    "Привет 👋",
+    "На связи бот @movieproject_bot! Как я могу тебе помочь?",
+    sep="\n"
 )
 
 @dp.message_handler(commands=['start'])
@@ -39,7 +41,7 @@ async def process_help_command(message: types.Message):
 
 @dp.message_handler(commands=['secret'])
 async def process_help_command(message: types.Message):
-    await message.reply(help_message)
+    await message.reply(text="Тык", url="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=PLxb0XwjhqM_RLETkiOkUZrEE8K-fP3V-p&index=3")
 
 @dp.message_handler()
 async def echo_message(msg: types.Message):

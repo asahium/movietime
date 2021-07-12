@@ -12,6 +12,8 @@ def search(name):
         print(", ".join(item.genres))
         print(", ".join(item.countries))
         i += 1
+        if i == 5:
+            break
 
 def info(t):
     kinopoisk = KP(token='Push your token here')
