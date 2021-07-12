@@ -1,4 +1,7 @@
+python-telegram-bot
+pillow
 requests
-aiohttp
-asyncio
+beautifulsoup4
+lxml
+Django
 aiogram
