@@ -3,9 +3,10 @@ import logging
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
+from aiogram.utils.markdown import text
 
 from config import TOKEN
-
+import keyboards as kb
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
