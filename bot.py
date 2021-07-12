@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO)
 ##
 
 Start_message = text(
-    "На связи бот @movietime! Как я могу тебе помочь?"
+    "На связи бот @movieproject_bot! Как я могу тебе помочь?"
 )
 
 @dp.message_handler(commands=['start'])
@@ -34,6 +34,10 @@ help_message = text(
 )
 
 @dp.message_handler(commands=['help'])
+async def process_help_command(message: types.Message):
+    await message.reply(help_message)
+
+@dp.message_handler(commands=['secret'])
 async def process_help_command(message: types.Message):
     await message.reply(help_message)
 
