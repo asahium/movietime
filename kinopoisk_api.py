@@ -129,7 +129,22 @@ class KP:
             except json.decoder.JSONDecodeError:
                 time.sleep(0.5)
                 continue
-
+    def search_by_genre(self, query):
+        for _ in range(10):
+            try:
+                request = requests.get(self.API + 'films/search-by-filters', headers=self.headers,
+                                       params={"genres": query, "page": 1})
+                request_json = json.loads(request.text)
+                output = []
+                for film in request_json['films']:
+                    try:
+                        output.append(SEARCH(film))
+                    except (Exception, BaseException):
+                        continue
+                return output
+            except json.decoder.JSONDecodeError:
+                time.sleep(0.5)
+                continue
 
 class CACHE:
     def __init__(self):

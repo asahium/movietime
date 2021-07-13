@@ -1,12 +1,17 @@
 import logging
-
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 from aiogram.utils.markdown import text
-from kinodef import search
+from aiogram.types import ReplyKeyboardRemove, \
+    ReplyKeyboardMarkup, KeyboardButton, \
+    InlineKeyboardMarkup, InlineKeyboardButton
+
+from kinodef import search, info
 from config import TOKEN
+from kinodef import kinopoisk
 import keyboards as kb
+import random
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
@@ -15,7 +20,7 @@ logging.basicConfig(level=logging.INFO)
 
 ##
 
-Start_message = text(
+start_message = text(
     "Привет 👋",
     "На связи бот @movieproject_bot! Как я могу тебе помочь?",
     "Для справки /help",
@@ -24,7 +29,7 @@ Start_message = text(
 
 @dp.message_handler(commands=['start'])
 async def process_start_command(message: types.Message):
-    await message.reply(Start_message, reply_markup=kb.markup_start)
+    await message.reply(start_message, reply_markup=kb.markup_start)
 
 ##
 
@@ -32,7 +37,8 @@ help_message = text(
     "Это бот советчик по фильмам",
     "Доступные команды:\n",
     "/start - приветствие",
-    "/search - поиск фильма",
+    "/search + \'часть названия фильма\' - поиск фильма",
+    "/search_full + \'название фильма\' - инфо о фильме по точному названию",
     "/secret - нажми на меня",
     sep="\n"
 )
@@ -44,8 +50,8 @@ async def process_help_command(message: types.Message):
 ##
 
 @dp.message_handler(commands=['secret'])
-async def process_secret_command(message: types.Message):
-    await message.reply(reply_markup=kb.secret)
+async def process_command_1(message: types.Message):
+    await message.reply("Хмм, интересно...", reply_markup=kb.inline_kb1)
 
 ##
 
@@ -55,23 +61,53 @@ async def process_search_command(message: types.Message):
 
 ##
 
+@dp.message_handler(commands=['search_full'])
+async def process_fullsearch_command(message: types.Message):
+    await message.reply(search(message))
+
+##
+
 error_message = text(
-    "Жулик, играй по правилам"
+    "Жулик, играй по правилам(ну или я просто не сделал эту кнопку пока)"
 )
 
 @dp.message_handler()
 async def echo_message(message: types.Message):
-    await message.reply(error_message)
-#    await bot.send_message(message.from_user.id, message.text)
+    if message.text == '🥧 Посоветуй фильм':
 
-'''
-@dp.message_handler(content_types=ContentType.ANY)
-async def unknown_message(msg: types.Message):
-    message_text = text(emojize('Я не знаю, что с этим делать :astonished:'),
-                        italic('\nЯ просто напомню,'), 'что есть',
-                        code('команда'), '/help')
-    await msg.reply(message_text, parse_mode=ParseMode.MARKDOWN)
-'''
+        await message.reply('Выбери жанр', reply_markup=kb.markup_advice)
+
+    elif message.text == '🍯 Комедия':
+        await message.reply('Ничего, сиди дома')
+
+    elif message.text == '🧃 Мультфильм':
+        await message.reply('Ничего, сиди дома')
+
+    elif message.text == '🐝 Фантастика':
+        await message.reply('Ничего, сиди дома')
+
+    elif message.text == '🧺 Драма':
+        await message.reply('Ничего, сиди дома')
+
+    elif message.text == '🍡 Боевик':
+        await message.reply('Ничего, сиди дома')
+
+    elif message.text == 'Назад':
+        await message.reply('Хорошо. Чего желаете?', reply_markup=kb.markup_start)
+
+    elif message.text == '🌷 Случайный фильм':
+        num = random.randint(1, 5000)
+        ans = info(num)
+        t = kinopoisk.get_film(num)
+        inline_btn_2 = InlineKeyboardButton(text='Ссылка на фильм', url=t.kp_url)
+        inline_kb2 = InlineKeyboardMarkup().add(inline_btn_2)
+        await message.reply(ans, reply_markup=inline_kb2)
+
+    elif message.text == '🌾 Что сейчас в кино?':
+        await message.reply('Ничего, сиди дома')
+
+    else:
+        await message.reply(error_message)
 
 ##
 
