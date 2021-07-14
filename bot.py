@@ -98,7 +98,7 @@ async def echo_message(message: types.Message):
 
         await message.reply(ans)
 
-    elif message.text == '🌾 Что сейчас в кино?':
+    elif message.text == '🌾 Что новенького?':
         await message.reply(new_in())
 
     elif message.text[:7] == '/search':
