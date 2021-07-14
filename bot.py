@@ -7,7 +7,7 @@ from aiogram.types import ReplyKeyboardRemove, \
     ReplyKeyboardMarkup, KeyboardButton, \
     InlineKeyboardMarkup, InlineKeyboardButton
 
-from kinodef import search, info
+from kinodef import search, info, search_genre
 from config import TOKEN
 from kinodef import kinopoisk
 import keyboards as kb
@@ -54,11 +54,11 @@ async def process_command_1(message: types.Message):
     await message.reply("Хмм, интересно...", reply_markup=kb.inline_kb1)
 
 ##
-
+'''
 @dp.message_handler(commands=['search'])
 async def process_search_command(message: types.Message):
     await message.reply(search(message))
-
+'''
 ##
 
 @dp.message_handler(commands=['search_full'])
@@ -74,23 +74,19 @@ error_message = text(
 @dp.message_handler()
 async def echo_message(message: types.Message):
     if message.text == '🥧 Посоветуй фильм':
-
-        await message.reply('Выбери жанр', reply_markup=kb.markup_advice)
+        await message.reply('Выбери жанр', reply_markup=kb.markup2)
 
     elif message.text == '🍯 Комедия':
-        await message.reply('Ничего, сиди дома')
-
-    elif message.text == '🧃 Мультфильм':
-        await message.reply('Ничего, сиди дома')
+        await message.reply(search_genre('комедия'))
 
     elif message.text == '🐝 Фантастика':
-        await message.reply('Ничего, сиди дома')
+        await message.reply(search_genre('фантастика'))
 
     elif message.text == '🧺 Драма':
-        await message.reply('Ничего, сиди дома')
+        await message.reply(search_genre('драма'))
 
     elif message.text == '🍡 Боевик':
-        await message.reply('Ничего, сиди дома')
+        await message.reply(search_genre('боевик'))
 
     elif message.text == 'Назад':
         await message.reply('Хорошо. Чего желаете?', reply_markup=kb.markup_start)
@@ -99,12 +95,15 @@ async def echo_message(message: types.Message):
         num = random.randint(1, 5000)
         ans = info(num)
         t = kinopoisk.get_film(num)
-        inline_btn_2 = InlineKeyboardButton(text='Ссылка на фильм', url=t.kp_url)
-        inline_kb2 = InlineKeyboardMarkup().add(inline_btn_2)
-        await message.reply(ans, reply_markup=inline_kb2)
+
+        await message.reply(ans)
 
     elif message.text == '🌾 Что сейчас в кино?':
         await message.reply('Ничего, сиди дома')
+
+    elif message.text[:7] == '/search':
+        await message.reply('Сейчас найду(нет)')
+
 
     else:
         await message.reply(error_message)

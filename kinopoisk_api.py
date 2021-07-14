@@ -133,7 +133,7 @@ class KP:
         for _ in range(10):
             try:
                 request = requests.get(self.API + 'films/search-by-filters', headers=self.headers,
-                                       params={"genres": query, "page": 1})
+                                       params={"genre": query, "page": 1})
                 request_json = json.loads(request.text)
                 output = []
                 for film in request_json['films']:
@@ -141,6 +141,21 @@ class KP:
                         output.append(SEARCH(film))
                     except (Exception, BaseException):
                         continue
+                return output
+            except json.decoder.JSONDecodeError:
+                time.sleep(0.5)
+                continue
+
+    def topnew(self):
+        for _ in range(10):
+            try:
+                request = requests.get('https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=1',
+                                       headers=self.headers
+                                       )
+                request_json = json.loads(request.text)
+                output = []
+                for film in request_json['films']:
+                    output.append(SEARCH(film))
                 return output
             except json.decoder.JSONDecodeError:
                 time.sleep(0.5)
