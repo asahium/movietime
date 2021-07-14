@@ -102,7 +102,7 @@ async def echo_message(message: types.Message):
         await message.reply('Ничего, сиди дома')
 
     elif message.text[:7] == '/search':
-        await message.reply('Сейчас найду(нет)')
+        await message.reply(search(message.text[7:]))
 
 
     else:
