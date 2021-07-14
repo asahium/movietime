@@ -7,7 +7,7 @@ from aiogram.types import ReplyKeyboardRemove, \
     ReplyKeyboardMarkup, KeyboardButton, \
     InlineKeyboardMarkup, InlineKeyboardButton
 
-from kinodef import search, info, search_genre
+from kinodef import search, info, search_genre, new_in
 from config import TOKEN
 from kinodef import kinopoisk
 import keyboards as kb
@@ -60,11 +60,11 @@ async def process_search_command(message: types.Message):
     await message.reply(search(message))
 '''
 ##
-
+'''
 @dp.message_handler(commands=['search_full'])
 async def process_fullsearch_command(message: types.Message):
     await message.reply(search(message))
-
+'''
 ##
 
 error_message = text(
@@ -99,7 +99,7 @@ async def echo_message(message: types.Message):
         await message.reply(ans)
 
     elif message.text == '🌾 Что сейчас в кино?':
-        await message.reply('Ничего, сиди дома')
+        await message.reply(new_in())
 
     elif message.text[:7] == '/search':
         await message.reply(search(message.text[7:]))
