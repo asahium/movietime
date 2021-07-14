@@ -95,7 +95,6 @@ async def echo_message(message: types.Message):
         num = random.randint(1, 5000)
         ans = info(num)
         t = kinopoisk.get_film(num)
-
         await message.reply(ans)
 
     elif message.text == '🌾 Что новенького?':
