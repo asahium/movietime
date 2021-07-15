@@ -7,14 +7,16 @@ from config import KP_TOKEN
 kinopoisk = KP(token=KP_TOKEN)
 
 def info(num):
-    t = kinopoisk.get_film(num)
+    item = kinopoisk.get_film(num)
 
     ans = text(
-        t.ru_name, t.year,'\n',
-        ", ".join(t.genres),'\n',
-        ", ".join(t.countries),'\n',
-        t.tagline, "\n",
-        t.kp_url
+        item.ru_name,'\n',
+        '📆 ', item.year,'\n',
+        '🎭 ', ", ".join(item.genres),'\n',
+        '🗺 ', ", ".join(item.countries),'\n',
+        item.tagline, "\n", '\n',
+        '🔗 ', item.kp_url,"\n",
+        sep=''
     )
     return ans
 
@@ -28,20 +30,16 @@ def search(name):
         i += 1
         if i == 6:
             break
-    '''for item in answer:
-        print(item.ru_name, item.year)
-        print(", ".join(item.genres))
-        print(", ".join(item.countries))
-    i = 1'''
     i = 1
     answer = []
     for item in answ:
         ans = text(
-            item.ru_name, item.year,'\n',
-            ", ".join(item.genres),'\n',
-            ", ".join(item.countries),'\n',
-            item.kp_url,"\n","\n"
-            )
+            i,') ', item.ru_name,'\n',
+            '📆 ', item.year,'\n',
+            '🎭 ', ", ".join(item.genres),'\n',
+            '🗺 ', ", ".join(item.countries),'\n','\n',
+            '🔗 ', item.kp_url,"\n",
+        sep='')
         answer.append(ans)
         i += 1
         if i == 6:
@@ -56,11 +54,12 @@ def search_genre(name):
     for item in top:
         if name in item.genres:
             ans = text(
-                item.ru_name, item.year,'\n',
-                ", ".join(item.genres),'\n',
-                ", ".join(item.countries),'\n',
-                item.kp_url,"\n"
-            )
+                i,') ', item.ru_name,'\n',
+                '📆 ', item.year,'\n',
+                '🎭 ', ", ".join(item.genres),'\n',
+                '🗺 ', ", ".join(item.countries),'\n','\n',
+                '🔗 ', item.kp_url,"\n",
+            sep='')
             answer.append(ans)
             i += 1
         if i == 6:
@@ -74,11 +73,12 @@ def new_in():
     answer = []
     for item in top:
         ans = text(
-            item.ru_name, item.year,'\n',
-            ", ".join(item.genres),'\n',
-            ", ".join(item.countries),'\n',
-            item.kp_url,"\n","\n"
-        )
+            i,') ', item.ru_name,'\n',
+            '📆 ', item.year,'\n',
+            '🎭 ', ", ".join(item.genres),'\n',
+            '🗺 ', ", ".join(item.countries),'\n','\n',
+            '🔗 ', item.kp_url,"\n",
+        sep='')
         answer.append(ans)
         i += 1
         if i == 6:

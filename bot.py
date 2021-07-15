@@ -1,4 +1,5 @@
 import logging
+import asyncio
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
@@ -23,6 +24,7 @@ logging.basicConfig(level=logging.INFO)
 start_message = text(
     "Привет 👋",
     "На связи бот @movieproject_bot! Как я могу тебе помочь?",
+    "Например для поиска фильма введи /search + \'часть названия фильма\'",
     "Для справки /help",
     sep="\n"
 )
@@ -38,7 +40,6 @@ help_message = text(
     "Доступные команды:\n",
     "/start - приветствие",
     "/search + \'часть названия фильма\' - поиск фильма",
-    "/search_full + \'название фильма\' - инфо о фильме по точному названию",
     "/secret - нажми на меня",
     sep="\n"
 )
@@ -68,13 +69,13 @@ async def process_fullsearch_command(message: types.Message):
 ##
 
 error_message = text(
-    "Жулик, играй по правилам(ну или я просто не сделал эту кнопку пока)"
+    "Жулик, играй по правилам"
 )
 
 @dp.message_handler()
 async def echo_message(message: types.Message):
     if message.text == '🥧 Посоветуй фильм':
-        await message.reply('Выбери жанр', reply_markup=kb.markup2)
+        await message.reply('Отлично 🍿 \nЯ выберу для тебя что-нибудь из топа. Какой жанр тебе интересен?', reply_markup=kb.markup2)
 
     elif message.text == '🍯 Комедия':
         await message.reply(search_genre('комедия'))
@@ -95,10 +96,14 @@ async def echo_message(message: types.Message):
         num = random.randint(1, 5000)
         ans = info(num)
         t = kinopoisk.get_film(num)
-        await message.reply(ans)
+        await message.reply('Сейчас сгенерирую для тебя что-нибудь интересное 🌺')
+        await asyncio.sleep(2)
+        await message.reply(ans, reply=False)
 
     elif message.text == '🌾 Что новенького?':
-        await message.reply(new_in())
+        await message.reply('Главные новинки кино и сериалов только для тебя 🐣 \nЕсли соберёшься в кино - не забудь маску')
+        await asyncio.sleep(2)
+        await message.reply(new_in(), reply=False)
 
     elif message.text[:7] == '/search':
         await message.reply(search(message.text[7:]))
