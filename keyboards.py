@@ -7,7 +7,6 @@ from aiogram.utils.markdown import text
 button_hi_1 = KeyboardButton('🥧 Посоветуй фильм')
 button_hi_2 = KeyboardButton('🌷 Случайный фильм')
 button_hi_3 = KeyboardButton('🌾 Что новенького?')
-
 button_hi_4 = KeyboardButton('🍯 Комедия')
 button_hi_5 = KeyboardButton('🍡 Боевик')
 button_hi_6 = KeyboardButton('🐝 Фантастика')

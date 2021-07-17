@@ -53,11 +53,17 @@ async def process_command_1(message: types.Message):
 error_message = text(
     "Жулик, играй по правилам")
 
+new_message = text(
+    'Главные новинки кино и сериалов только для тебя 🐣 \nЕсли соберёшься в кино - не забудь маску')
+
+advice_message = text(
+    'Отлично 🍿 \nЯ выберу для тебя что-нибудь из топа. Какой жанр тебе интересен?')
+
 
 @dp.message_handler()
 async def echo_message(message: types.Message):
     if message.text == '🥧 Посоветуй фильм':
-        await message.reply('Отлично 🍿 \nЯ выберу для тебя что-нибудь из топа. Какой жанр тебе интересен?', reply_markup=kb.markup2)
+        await message.reply(advice_message, reply_markup=kb.markup2)
 
     elif message.text == '🍯 Комедия':
         await message.reply(search_genre('комедия'))
@@ -83,7 +89,7 @@ async def echo_message(message: types.Message):
         await message.reply(ans, reply=False)
 
     elif message.text == '🌾 Что новенького?':
-        await message.reply('Главные новинки кино и сериалов только для тебя 🐣 \nЕсли соберёшься в кино - не забудь маску')
+        await message.reply(new_message)
         await asyncio.sleep(2)
         await message.reply(new_in(), reply=False)
 

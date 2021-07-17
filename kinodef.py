@@ -1,6 +1,5 @@
 import kinopoisk_api
 from aiogram.utils.markdown import text
-
 from kinopoisk_api import KP
 from config import KP_TOKEN
 
