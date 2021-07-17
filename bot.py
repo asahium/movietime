@@ -19,21 +19,18 @@ dp = Dispatcher(bot)
 
 logging.basicConfig(level=logging.INFO)
 
-##
-
 start_message = text(
     "Привет 👋",
     "На связи бот @movieproject_bot! Как я могу тебе помочь?",
-    "Например для поиска фильма введи /search + \'часть названия фильма\'",
+    "Например для поиска фильма введи /search + \
+    \'часть названия фильма\'",
     "Для справки /help",
-    sep="\n"
-)
+    sep="\n")
+
 
 @dp.message_handler(commands=['start'])
 async def process_start_command(message: types.Message):
     await message.reply(start_message, reply_markup=kb.markup_start)
-
-##
 
 help_message = text(
     "Это бот советчик по фильмам",
@@ -41,36 +38,21 @@ help_message = text(
     "/start - приветствие",
     "/search + \'часть названия фильма\' - поиск фильма",
     "/secret - нажми на меня",
-    sep="\n"
-)
+    sep="\n")
+
 
 @dp.message_handler(commands=['help'])
 async def process_help_command(message: types.Message):
     await message.reply(help_message)
 
-##
 
 @dp.message_handler(commands=['secret'])
 async def process_command_1(message: types.Message):
     await message.reply("Хмм, интересно...", reply_markup=kb.inline_kb1)
 
-##
-'''
-@dp.message_handler(commands=['search'])
-async def process_search_command(message: types.Message):
-    await message.reply(search(message))
-'''
-##
-'''
-@dp.message_handler(commands=['search_full'])
-async def process_fullsearch_command(message: types.Message):
-    await message.reply(search(message))
-'''
-##
-
 error_message = text(
-    "Жулик, играй по правилам"
-)
+    "Жулик, играй по правилам")
+
 
 @dp.message_handler()
 async def echo_message(message: types.Message):
@@ -108,11 +90,9 @@ async def echo_message(message: types.Message):
     elif message.text[:7] == '/search':
         await message.reply(search(message.text[7:]))
 
-
     else:
         await message.reply(error_message)
 
-##
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)

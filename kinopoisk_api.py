@@ -10,7 +10,8 @@ class FILM:
         self.kp_id = data['filmId']
         self.name = data['nameRu'] if data['nameEn'] == '' else data['nameEn']
         self.ru_name = data['nameRu']
-        self.year = data['year'].split('-')[0] if data['type'] != 'FILM' else data['year']
+        self.year = data['year'].split(
+            '-')[0] if data['type'] != 'FILM' else data['year']
         self.duration = data['filmLength']
         self.tagline = data['slogan'] if data['slogan'] is not None else '-'
         self.description = data['description']
@@ -54,7 +55,8 @@ class KP:
     def get_film(self, film_id):
         cache = CACHE().load()
 
-        rate_request = requests.get(f'https://rating.kinopoisk.ru/{film_id}.xml').text
+        rate_request = requests.get(
+            f'https://rating.kinopoisk.ru/{film_id}.xml').text
         try:
             kp_rate = xml.fromstring(rate_request)[0].text
         except IndexError:
@@ -74,7 +76,8 @@ class KP:
 
         for _ in range(10):
             try:
-                request = requests.get(self.API + 'films/' + str(film_id), headers=self.headers)
+                request = requests.get(
+                    self.API + 'films/' + str(film_id), headers=self.headers)
                 request_json = json.loads(request.text)
                 request_json['data']['kp_rate'] = kp_rate
                 request_json['data']['imdb_rate'] = imdb_rate
@@ -129,6 +132,7 @@ class KP:
             except json.decoder.JSONDecodeError:
                 time.sleep(0.5)
                 continue
+
     def search_by_genre(self, query):
         for _ in range(10):
             try:
@@ -160,6 +164,7 @@ class KP:
             except json.decoder.JSONDecodeError:
                 time.sleep(0.5)
                 continue
+
 
 class CACHE:
     def __init__(self):
