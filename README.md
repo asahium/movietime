@@ -43,8 +43,6 @@ $ pip install -r requirements.txt
 ### Получение токена для доступа к данным сайта [Кинопоиск](https://www.kinopoisk.ru)
 Для получения токена необходима регистрация на сайте <a href="https://kinopoiskapiunofficial.tech/signup">kinopoiskapiunofficial.tech</a>. В случае отсутствия регистрации можно использовать мой профиль. После регистрации перейдите в настройки своего <a href="https://kinopoiskapiunofficial.tech/user">профиля</a> и сохраните токен.
 
-<img align="center" src="https://i.imgur.com/QkXRQ9t.png" alt="Регистрация">
-
 ### Получение токена Telegram
 Для получения токена необходимо зарегистрировать своего бота в [@BotFather](https://t.me/botfather). После регистрации перейдите вы получите ссылку на своего бота и токен, важно сохранить токен. Его после надо вставить в [конфиг](https://github.com/asahium/movietime/blob/main/config.py).
 

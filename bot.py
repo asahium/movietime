@@ -10,7 +10,7 @@ from aiogram.types import ReplyKeyboardRemove, \
 
 from kinodef import search, info, search_genre, new_in
 from config import TOKEN
-from kinodef import kinopoisk
+from kinodef import kino
 import keyboards as kb
 import random
 
@@ -83,7 +83,6 @@ async def echo_message(message: types.Message):
     elif message.text == '🌷 Случайный фильм':
         num = random.randint(1, 5000)
         ans = info(num)
-        t = kinopoisk.get_film(num)
         await message.reply('Сейчас сгенерирую для тебя что-нибудь интересное 🌺')
         await asyncio.sleep(2)
         await message.reply(ans, reply=False)

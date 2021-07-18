@@ -1,13 +1,13 @@
-import kinopoisk_api
+import kinopoisk
 from aiogram.utils.markdown import text
-from kinopoisk_api import KP
+from kinopoisk import KINOPOISK
 from config import KP_TOKEN
 
-kinopoisk = KP(token=KP_TOKEN)
+kino = KINOPOISK(token=KP_TOKEN)
 
 
 def info(num):
-    item = kinopoisk.get_film(num)
+    item = kino.get_film(num)
 
     ans = text(
         item.ru_name, '\n',
@@ -21,7 +21,7 @@ def info(num):
 
 
 def search(name):
-    search = kinopoisk.search(name)
+    search = kino.search(name)
     i = 1
     answ = []
     for item in search:
@@ -48,7 +48,7 @@ def search(name):
 
 
 def search_genre(name):
-    top = kinopoisk.top500()
+    top = kino.top500()
     i = 1
     answer = []
     for item in top:
@@ -69,7 +69,7 @@ def search_genre(name):
 
 
 def new_in():
-    top = kinopoisk.topnew()
+    top = kino.topnew()
     i = 1
     answer = []
     for item in top:

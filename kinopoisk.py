@@ -41,7 +41,7 @@ class SEARCH:
         self.poster_preview = data['posterUrlPreview']
 
 
-class KP:
+class KINOPOISK:
     def __init__(self, token, secret=None):
         self.token = token
         self.secret = secret
